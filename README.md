@@ -1,105 +1,66 @@
------
+# Sales Forecasting: Predictive Analytics
 
-# 📈 Sales Forecasting: Predictive Analytics 
+A machine-learning project exploring how historical sales data can be used to estimate future demand and support business planning.
 
-> **"Turning historical data into future strategy."**
-> This project leverages machine learning to predict daily sales trends, enabling businesses to move from reactive to proactive decision-making.
+## Project Overview
 
------
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python)](https://www.python.org/)
-[![Machine Learning](https://img.shields.io/badge/Focus-Unsupervised%20Learning-gold)](https://scikit-learn.org/)
-[![SHAP](https://img.shields.io/badge/Explainability-SHAP-red)](https://github.com/slundberg/shap)
+The project works with historical sales records, prepares date-based features, and trains a Linear Regression baseline. It is intended to demonstrate a practical forecasting workflow, from data preparation to model evaluation.
 
-## 🚀 Project Overview
+Forecasts are estimates, not guarantees. Model performance should be assessed against a suitable time-ordered test set and compared with a simple baseline.
 
-This end-to-end pipeline analyzes past sales patterns to estimate future demand. By transforming raw transactional records into time-series insights, we provide a roadmap for business efficiency.
+## Technologies
 
-### **Why Forecast?**
+- Python
+- Pandas and NumPy
+- scikit-learn
+- Matplotlib and Seaborn
 
-  * 📦 **Inventory Mastery:** Maintain optimal stock levels.
-  * 💸 **Cost Reduction:** Minimize overhead by avoiding overstock.
-  * 👥 **Resource Allocation:** Staff correctly for peak periods.
-  * 📊 **Financial Clarity:** Data-driven budgeting and goal setting.
+## Workflow
 
------
+1. **Data preparation:** parse order dates and inspect missing or invalid values.
+2. **Feature engineering:** derive time-related features such as year, month, day of week, and weekend indicators.
+3. **Model training:** fit a Linear Regression baseline.
+4. **Evaluation:** assess predictions on a time-ordered holdout set to reduce the risk of leaking future information into training.
+5. **Visualisation:** compare actual and predicted values and review forecast trends.
 
-## 🛠️ Tech Stack
+## Reported Baseline Result
 
-| Category | Tools |
-| :--- | :--- |
-| **Language** | `Python` |
-| **Data Handling** | `Pandas`, `NumPy` |
-| **ML Engine** | `Scikit-Learn` (Linear Regression) |
-| **Visualization** | `Matplotlib`, `Seaborn` |
+The earlier project notes report a Mean Absolute Error (MAE) of **1614.74**. Treat this as a project-reported result until it is reproduced from the current notebook and its exact data split. MAE is expressed in the target variable's units, so it should be interpreted alongside the typical sales value and a baseline model.
 
------
+## Getting Started
 
-## 📑 The Pipeline
+The repository's notebook and dataset folders are the best starting points. To run the analysis locally:
 
-### 1\. Data Ingestion & Cleaning
+1. Clone the repository:
 
-We process 9,800 records, ensuring dates are properly typed and missing values (like those found in `Postal Code`) are handled to maintain model integrity.
+   ```bash
+   git clone https://github.com/Don-Sanvura/Sales_Forecasting.git
+   cd Sales_Forecasting
+   ```
 
-```python
-# Converting Order Date to datetime format
-df['Order Date'] = pd.to_datetime(df['Order Date'], dayfirst=True)
-df = df.dropna()
-```
+2. Install the libraries used by the notebook:
 
-### 2\. Feature Engineering 🛠️
+   ```bash
+   pip install pandas numpy scikit-learn matplotlib seaborn jupyter
+   ```
 
-To help the model "understand" time, we decompose dates into cyclical and categorical features:
+3. Launch Jupyter and open the forecasting notebook:
 
-  * **Temporal Splits:** Year, Month, Day.
-  * **Behavioral Indicators:** `DayOfWeek` and `IsWeekend`.
-  * **Advanced Logic:** Sin/Cos transformations for seasonal periodicity.
+   ```bash
+   jupyter notebook
+   ```
 
-### 3\. Model Training & Evaluation
+Check the notebook for the exact dataset path and execution order. Do not commit private or licensed data without permission.
 
-Using a **Linear Regression** approach, we split the data sequentially (keeping the time order intact) to simulate real-world forecasting.
+## Potential Improvements
 
-> **Current Performance:**
-> **Mean Absolute Error (MAE):** 1614.74
-> *This serves as our baseline for future iterations with more complex algorithms.*
+- Compare Linear Regression with a naïve or seasonal baseline.
+- Report MAE alongside RMSE and an appropriate scaled metric.
+- Plot residuals and inspect performance across different time periods.
+- Save reproducible evaluation results and document the forecast horizon.
+- Add a tested requirements file and a sample dataset where permitted.
 
------
+## Author
 
-## 📊 Results & Visualization
-
-### **Actual vs. Predicted**
-
-The model tracks the general variance of the test set, identifying the core "heartbeat" of the sales cycles.
-
- *(Replace with your actual exported plot image)*
-
-### **30-Day Outlook**
-
-Our forecast extends 30 days into the future, providing a clear visual of upcoming demand spikes.
-
------
-
-## 💡 Business Insights
-
-  * **Seasonality Matters:** Sales are significantly influenced by the day of the week and month-end cycles.
-  * **Strategic Planning:** The model identifies specific "high-load" days, allowing managers to optimize the supply chain.
-  * **Iterative Growth:** While Linear Regression provides a strong baseline, future versions will explore **XGBoost** or **Prophet** for higher precision.
-
------
-
-## 📁 Repository Structure(Idea)
-
-```bash
-├── dataSet/
-│   └── train.csv          # Historical sales records
-├── notebooks/
-│   └── forecasting.ipynb  # Main analysis and modeling
-├── README.md              # Project documentation
-```
-
------
-
-### Personal Info
------
-  >> **[ [www.linkedin.com/in/don-sanvura] ]** <<
-  >> **[ [Dwagsanvura@gmail.com] ]** <<           
------
+**Don Sanvura**  
+[GitHub profile](https://github.com/Don-Sanvura) · [LinkedIn](https://www.linkedin.com/in/don-sanvura)
